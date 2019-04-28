@@ -12,7 +12,7 @@ You need to have SML on your machine.
 Clone the repo
 
 ```
-git clone 
+git clone git@github.com:meta-logic/mmset-unif.git
 ```
 
 ### Notes
