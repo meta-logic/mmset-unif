@@ -18,7 +18,8 @@ git clone git@github.com:meta-logic/mmset-unif.git
 ### Notes
 In this project, the *datatypes.sml* file  describes the datatypes used to represent the terms, multiset variables, and mmsets.
 
-A term, *t* is refered to as **form** of *t* which can be represented as either **Atom "t"** (grounded atom), **AtomVar "t"** (atom variable), or **FormVar "t"** (formula variable). If *t = f(a1,a2,...,an)* for some function *f* and list of terms *a1,a2,...,an*, it is refered to as **form** of *t* represented as **Form (Con "f", [form** of *a1*, **form** of *a2*,..., **form** of *an* **])**.
+A term, *t* is refered to as **form** of *t* which can be represented as either **Atom "t"** (grounded atom), **AtomVar "t"** (atom variable), or **FormVar "t"** (formula variable). 
+If *t = f(a1,a2,...,an)* for some function *f* and list of terms *a1,a2,...,an*, it is refered to as **form** of *t* represented as **Form (Con "f", [form** of *a1*, **form** of *a2*,..., **form** of *an* **])**.
 A multiset variable, **G** is refered to as **ctx_var** of *G* represented as **CtxVar "G"**.
 A mmset, *M = (t1, t2,...,tn|G1,G2,...,Gm)* is referred to as **ctx** of *M* represented as **Ctx([ctx_var** of *G1*, **ctx_var** of *G2*,..., **ctx_var** of *Gm* **], [form** of *t1*, **form** of *t2*,..., **form** of *tn* **])**.
 
