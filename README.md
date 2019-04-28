@@ -5,7 +5,7 @@ Unification of multisets with multiple multiset variables
 These instructions will get you a copy of the project up and running on your local machine for testing purposes.
 
 ### Prerequisites
-You need to have SML on your machine.
+The projects runs on Standard ML of New Jersey >= v110.82.
 
 ### Installing
 
