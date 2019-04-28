@@ -27,19 +27,19 @@ The *tests.sml* file is where testing of mmset unification can be done. There ar
 sml
 - use "tests.sml";
 ```
-All tests are functions, so for example, to run test case 5 just do:
+All tests are functions, so for example, to run test case 15 just do:
 ```
 - test_15();
 ```
 
 To create your own test case write your test like the existing test cases in the format below:
-
+```
 fun test_**TEST NAME**() = 
     let val CONTEXT_1 = Ctx(**LIST OF MULTISETS**, **LIST OF TERMS**)
         val CONTEXT_2 = Ctx(**LIST OF MULTISETS**, **LIST OF TERMS**)
         val LIST_OF_UNIFICATIONS = Unify_ctx(CONTEXT_1, CONTEXT_2)
     in  print_sigs_cons LIST_OF_UNIFICATIONS end
-
+```
 ##### Interpreting Output
 The output of these tests is printed on the terminal console as a list of subsitution and constraint pairs.
 For example:
