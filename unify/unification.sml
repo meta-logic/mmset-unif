@@ -9,7 +9,7 @@ fun printF (NONE) = []
             List.map(fn sb => 
                 (case sb of Fs(a,b) => (form_toString a ^ " => " ^ form_toString b)
                         |  CVs(a,b) =>  (ctx_var_toString a ^ " => " ^ ctx_toString b)
-                        ))ls)sigma
+                ))ls)sigma
 
 fun printS ([]) = []
     | printS (sigma) = 
@@ -17,7 +17,7 @@ fun printS ([]) = []
             List.map(fn sb => 
                 (case sb of Fs(a,b) => (form_toString a ^ " => " ^ form_toString b)
                         |  CVs(a,b) =>  (ctx_var_toString a ^ " => " ^ ctx_toString b)
-                        ))ls)sigma
+                ))ls)sigma
 
 fun printC ([]) = []
     | printC (cons) = 
@@ -110,6 +110,8 @@ fun Unify_formL (x, y) =
     end
 
 
+(* NEED TO MAKE SURE THAT THERE ARE NO REPEATS, POSSIBLY MEMOIZE *)
+
 fun Unify_ctx (Ctx(vl1, fl1), Ctx(vl2, fl2)) =
     let
         fun fresh(CtxVar(x)) = CtxVar(x ^ "'")
@@ -164,8 +166,8 @@ fun Unify_ctx (Ctx(vl1, fl1), Ctx(vl2, fl2)) =
                             )sigma1
                         )sigma2)
                 in 
-                    List.map(fn (sb,c) => (List.filter(fn CVs(cx, Ctx(cxs, _)) => (case cxs of 
-                        [tx] => not (ctx_var_eq (tx, cx)) | _ => false))sb, c))temp
+                    List.map(fn (sb,c) => (List.filter(fn CVs(cx, Ctx(cxs, _)) => 
+                        not (List.length(cxs) = 1 andalso ctx_var_eq (List.hd cxs, cx)))sb, c))temp
                 end
             end
 
@@ -198,7 +200,7 @@ fun Unify_ctx (Ctx(vl1, fl1), Ctx(vl2, fl2)) =
                 in if List.length(subs) = 0 then NONE
                 else SOME(ListPair.zip(subs, cons)) end
             | Unify_ctx_AUX (Ctx(vl1, fl1), Ctx([], fl2)) = 
-                if List.length(fl2) < List.length(fl1) then NONE
+                if List.length(fl1) > List.length(fl2) then NONE
                 else SOME(unify_specific_k(vl1, fl1, [], fl2, List.length fl1))
             | Unify_ctx_AUX (Ctx([], fl1), Ctx(vl2, fl2)) = 
                 if List.length(fl1) < List.length(fl2) then NONE

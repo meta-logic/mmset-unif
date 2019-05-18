@@ -2,15 +2,9 @@ use "helpers.sml";
 
 
 fun apply_form_Unifier (item, []) = item
+    | apply_form_Unifier (Form(c, subforms), ls) = Form(c, apply_subform_Unifier(subforms, ls)) 
     | apply_form_Unifier (item, Fs(f1,f2)::ls) = (case form_eq(item, f1) of
-            true => f2
-            | false => (case item of
-                        Form(c, subforms) => 
-                            let val applied = Form(c, apply_subform_Unifier(subforms, [Fs(f1,f2)])) 
-                            in
-                                if form_eq(item, applied) then apply_form_Unifier(item, ls) else applied
-                            end 
-                        | _ => apply_form_Unifier(item, ls)))
+            true => f2 | false => apply_form_Unifier (item, ls))
     | apply_form_Unifier (item, a::ls) = apply_form_Unifier (item, ls)
 and apply_subform_Unifier ([], subs) = []
     | apply_subform_Unifier (item::fl, subs) =
