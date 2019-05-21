@@ -162,7 +162,21 @@ fun Unify_ctx (Ctx(vl1, fl1), Ctx(vl2, fl2)) =
                     List.concat(
                         List.map(fn s1 => 
                             List.map(fn s2 => 
-                                (s1 @ s2, [get_constraint(post_ctx s1, post_ctx s2)])
+                                let val (subs, [(fresh_g, set1, set2)]) = 
+                                    (s1 @ s2, [get_constraint(post_ctx s1, post_ctx s2)]) 
+                                in 
+                                    if List.length(set1) = 1 then 
+                                    (List.take(
+                                    UnifierComposition(subs,[CVs(List.hd(set1),Ctx(set2,nil))]),
+                                    List.length subs),
+                                    [get_constraint([],[])])
+                                    else if List.length(set2) = 1 then
+                                    (List.take(
+                                    UnifierComposition(subs,[CVs(List.hd(set2),Ctx(set1,nil))]),
+                                    List.length subs),
+                                    [get_constraint([],[])])
+                                    else (subs, [(fresh_g, set1, set2)])
+                                end
                             )sigma1
                         )sigma2)
                 in 
@@ -172,8 +186,8 @@ fun Unify_ctx (Ctx(vl1, fl1), Ctx(vl2, fl2)) =
             end
 
         fun unify_specific_k (vl1, fl1, vl2, fl2, i) =
-            let val k_fl1 = chooseK(fl1, i)
-                val k_fl2 = chooseK(fl2, i)
+            let val k_fl1 = chooseK(fl1, i, form_eq)
+                val k_fl2 = chooseK(fl2, i, form_eq)
                 val everyMatchOfK  = 
                     List.concat(
                         List.map(fn (chosen_l2, left_l2) => 

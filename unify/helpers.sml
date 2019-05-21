@@ -1,7 +1,7 @@
 use "datatypes.sml";
 
 
-fun chooseK (forms, k) = 
+fun chooseK (forms, k, cmpf) = 
     let
         fun set_chosen ([], cmpf) = []
             | set_chosen ((x,y)::ls, cmpf) = 
@@ -21,8 +21,8 @@ fun chooseK (forms, k) =
                     end
     in
         case Int.compare(k, Int.div(formSize, 2)) of 
-            GREATER =>  set_chosen(choose(forms, k, []), form_eq)
-            | _ => set_chosen(List.map(fn (a,b) => (b,a))(choose(forms, formSize-k, [])), form_eq)
+            GREATER => set_chosen(choose(forms, k, []), cmpf)
+            | _ => set_chosen(List.map(fn (a,b) => (b,a))(choose(forms, formSize-k, [])), cmpf)
     end
 
 fun chooseDP (forms, k) =
@@ -56,7 +56,7 @@ fun permutations ([], cmpf) = [nil]
             )forms)
 
 fun distribute (ctx, f) = List.tabulate(List.length(ctx), fn i => 
-                    List.take(ctx, i) @ [f::List.nth(ctx, i)] @ List.drop(ctx, i+1)) 
+                    List.take(ctx, i) @ [List.nth(ctx, i) @ [f]] @ List.drop(ctx, i+1)) 
 
 fun partition_into (n, forms) = 
     let
