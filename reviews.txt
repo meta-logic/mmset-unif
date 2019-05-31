@@ -1,0 +1,142 @@
+Dear Zan Naeem,
+
+We gladly inform you that your submission to UNIF 2019
+
+6: Unification of Multisets with Multiple Labelled Multiset Variables
+
+has been accepted.
+
+Each submission was reviewed by three reviewers. Please 
+prepare your final abstract by taking into account the 
+reviewers' comments attached to this message.
+
+We ask you to upload in the EasyChair UNIF 2019
+submission site both the pdf and source files of
+your revised extended abstract, limited to eight
+pages, using the EasyChair style.
+
+The deadline for submitting your final draft is June 5th, 2019.
+Please keep in mind that this is a firm deadline.
+
+The registration can be done at the following webpage: 
+http://easyconferences.eu/fscd2019/registration-2/ "
+
+Finally, it is required that at least one of the authors has 
+to register for the workshop.
+
+
+Best regards, 
+
+Daniele Nantes & Serdar Erbatur
+
+SUBMISSION: 6
+TITLE: Unification of Multisets with Multiple Labelled Multiset Variables
+
+
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 6
+TITLE: Unification of Multisets with Multiple Labelled Multiset Variables
+AUTHORS: Zan Naeem and Giselle Reis
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+This paper gives an algorithm for multiset unification where the terms being unified have more than one multiset variable, that is, terms are of the form {t_1, t2, … tk, | M1, …, Mn} where the ti are non variable terms and the Mj are variables standing for labeled multisets.  The authors provide a motivation for terms with more than one variable  in multiplicative rules in sequent calculi.  Besides motivating and describing the algorithm, they also analyze its complexity, and give methods for avoiding redundant unifiers. They have implemented the algorithm in SML, and provide a link to the implementation.
+
+This is a well-motivated, well written paper, and I think it deserves a place in UNIF.  My main criticism is that the 5-page abstract is provided with appendices, one of which contains the pseudocode of that algorithm, which is only pointed to in the abstract.  I assume that these  appendices will not be put online at the UNIF website.  However, the abstract gives a good, if informal overview of the algorithm, so it should not be a problem if they are missing.   If the authors want to make the actual algorithms available to the UNIF attendees, I assume that they can put them on the website with the SML code.
+
+It would also be good if the authors said something about the performance of their SML code on examples that commonly occur in sequent calculi.  However, there is only so much you can fit into 5 pages.  I hope that this will be addressed in the presentation, however.
+
+
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 6
+TITLE: Unification of Multisets with Multiple Labelled Multiset Variables
+AUTHORS: Zan Naeem and Giselle Reis
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+The authors present an algorithm for the following problem:
+
+given {t1, ..., tn, X1, ..., Xk} and {s1, ..., sm, Y1, ..., Yl} where the s/t
+are first-order terms and the X/Y are multiset variables, compute a complete set
+of unifiers.
+
+It thereby extends previous work which only dealt with one multiset variable.
+
+I liked most of the paper: There is clear motivation with possible application
+of multiset unification; the various sub-algorithms are well motivated and
+explained; complexity considerations and optimizations are investigated; and it
+definitely fits to the topic of the workshop.
+
+However, there are also two short-comings: it is a pity that because of the
+space restriction the unification algorithm itself is only part of the appendix,
+and the constraints-part might need additional explanation.
+
+Overall, I definitely recommend to accept this paper at UNIF 2019.
+
+
+Details:
+
+Abstract: "meaning that a unification" -> "meaning that a unifier" **************DONE
+
+Footnote: "responsibility of the author." -> "responsibility of the authors." **************DONE
+
+Section 2, first paragraph: 
+ for sure: "M1 =_T M2" -> "M1 sigma =_T M2 sigma" DONE
+ maybe:    "M1 =_T M2" -> "M1 sigma =_{T_sigma} M2 sigma", since the theory **************NOT SURE
+    depends on the sigma
+
+Section 2: "The function choose(S,c) returns a set of tuples (Sc,Sr)" 
+Please be consistent: In Alg. 2 the set of tuples itself is called Sc, not the first component of a tuple. **************DONE, Changed S to F, for consistency
+
+Paragraph "Constraints" and Theorem 2: 
+The wording in the paragraph Constraints indicates that T_sigma is only defined
+for unifiers sigma that are returned by Alg. 1. However, in Theorem 2 you use an
+existential quantifier over arbitrary sigma and then consider T_sigma. So how is
+T_sigma defined there. Moreover, it is not completely clear to me, why T_sigma
+is a "set" of constraints, since there is only one equality.
+
+Because of these confusions in the notion of constraints and in the usage of
+constraints for equality, it is also not completely clear, what a complete set
+of unifiers would be, in particular a definition of "sigma is more general than
+sigma'" would be welcome, to see how the theories T_sigma and T_sigma' must be
+related.
+
+Similarly, in Theorems 3 and 4, doesn't one need a relation on the theories as
+well?
+
+Page 5, first line: "casing on" -> "a case analysis on" **************DONE
+
+Algorithm 5:
+I would drop lines 10 and 12 and replace 11 and 13 by the following lines: 
+11: if exact then ...
+13: if not exact then ...
+(I do not see why a case analysis on ts = {} is required) **************NOT SURE, Can't remember if there really is a valid reason 
+
+
+
+(I did not check the proofs)
+
+
+
+----------------------- REVIEW 3 ---------------------
+SUBMISSION: 6
+TITLE: Unification of Multisets with Multiple Labelled Multiset Variables
+AUTHORS: Zan Naeem and Giselle Reis
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+The authors provide an algorithm for finding unifiers of multisets with multiple multiset variables. The main contribution of this paper is providing the pseudo code for this algorithm along with a link to a SML  implementation. A complexity analysis is provided that shows that the complexity is quite high. It would be useful to see an interesting problem that can be solved despite this high complexity. The authors mention that for their purposes it runs fast enough an example here would be useful. For future work it might be interesting to study what the complexity is in the average case.
+
+At least one fully worked out concrete example would greatly improve the readability of the paper. The authors state that their algorithm is sound, complete, and terminating however formal proofs of these would be helpful. The appendix material is crucial to the readability of the paper since it contains all of the pseudo code and proofs. This paper is well written and is clearly in the scope of Unif when the additional proofs and examples are added. 
+
+Abstract: The variables are labelled, meaning that a unification that places a term in a multiset variable Mi is different from another that places a term in a multiset variable Mj, for i ̸= j.
+Instead of “a unification” use unifier or a unification step? **************DONE
+
+Page 1: what is D? **************DONE, stated D is a formula
+
+Page 4: …the unification runs in O(n! m!). 
+The unification algorithm … **************DONE
